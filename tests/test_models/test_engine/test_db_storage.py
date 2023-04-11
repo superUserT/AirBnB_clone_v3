@@ -68,8 +68,8 @@ test_db_storage.py'])
                             "{:s} method needs a docstring".format(func[0]))
 
 
-class TestFileStorage(unittest.TestCase):
-    """Test the FileStorage class"""
+class TestDBStorage(unittest.TestCase):
+    """Test the DBStorage class"""
     @unittest.skipIf(models.storage_t != 'db', "not testing db storage")
     def test_all_returns_dict(self):
         """Test that all returns a dictionaty"""
@@ -86,3 +86,34 @@ class TestFileStorage(unittest.TestCase):
     @unittest.skipIf(models.storage_t != 'db', "not testing db storage")
     def test_save(self):
         """Test that save properly saves objects to file.json"""
+
+    @unittest.skipIf(models.storage_t != 'db', "not testing db storage")
+    def test_get(self):
+        # Create a test User object and add it to the database
+        user = User(name="Alice")
+        self.DBStorage.new(user)
+        self.DBStorage.save()
+
+        # Get the User object by ID and check that it matches
+        retrieved_user = self.DBStorage.get(User, user.id)
+        self.assertEqual(user, retrieved_user)
+
+    @unittest.skipIf(models.storage_t != 'db', "not testing db storage")
+    def test_count(self):
+        # Create some test objects and add them to the database
+        user1 = User(name="Alice")
+        self.DBStorage.new(user1)
+        user2 = User(name="Bob")
+        self.DBStorage.new(user2)
+        base_model = BaseModel()
+        self.DBStorage.new(base_model)
+        self.DBStorage.save()
+
+        # Test counting all objects
+        self.assertEqual(self.DBStorage.count(), 3)
+
+        # Test counting User objects only
+        self.assertEqual(self.DBStorage.count(User), 2)
+
+        # Test counting BaseModel objects only
+        self.assertEqual(self.DBStorage.count(BaseModel), 1)
