@@ -17,6 +17,7 @@ def teardown(ctx):
     """If the program finish"""
     storage.close()
 
+
 # Define a custom 404 error handler
 @app.errorhandler(404)
 def handle_404(e):
