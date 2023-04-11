@@ -13,8 +13,9 @@ from models.state import State
 from models.user import User
 from os import getenv
 import sqlalchemy
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, inspect
 from sqlalchemy.orm import scoped_session, sessionmaker
+from sqlalchemy import inspect
 
 classes = {"Amenity": Amenity, "City": City,
            "Place": Place, "Review": Review, "State": State, "User": User}
@@ -74,3 +75,16 @@ class DBStorage:
     def close(self):
         """call remove() method on the private session attribute"""
         self.__session.remove()
+
+    def get(self, cls, id):
+        obj = self.__session.query(cls).get(id)
+        return obj
+
+    def count(self, cls=None):
+        if cls is None:
+            count = 0
+            for clss in classes:
+                count += self.__session.query(classes[clss]).count()
+            return count
+
+        return self.__session.query(cls).count()
