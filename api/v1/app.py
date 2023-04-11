@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """Principal API"""
-from flask import Flask
+from flask import Flask, jsonify
 from models import storage
 from api.v1.views import app_views
 from os import getenv
@@ -16,6 +16,12 @@ app.register_blueprint(app_views)
 def teardown(ctx):
     """If the program finish"""
     storage.close()
+
+# Define a custom 404 error handler
+@app.errorhandler(404)
+def handle_404(e):
+    """Handling 404 error"""
+    return jsonify(error="Not found"), 404
 
 
 if __name__ == "__main__":
