@@ -16,6 +16,7 @@ def status():
     """Returning the api status"""
     return jsonify(status='OK')
 
+
 @app_views.route('/stats', methods=['GET'], strict_slashes=False)
 def stats():
     """Returning the classes with their number of instances"""
@@ -28,5 +29,5 @@ def stats():
 
     for plural, cls in classes.items():
         count_dict[plural] = storage.count(cls)
-    
+
     return jsonify(count_dict)
