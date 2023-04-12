@@ -1,5 +1,9 @@
 #!/usr/bin/python3
-"""Routes"""
+"""
+This is the place module
+contains all the routes
+for manage the places class
+"""
 from api.v1.views import app_views
 from flask import jsonify, abort, request
 from models import storage
