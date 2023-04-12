@@ -74,6 +74,8 @@ def update_amenity(amenity_id: str):
         abort(400, 'Not a JSON')
 
     amenity = storage(Amenity, amenity_id)
+    if amenity is None:
+        abort(404)
 
     for key, value in data.items():
         if key in ['id', 'created_at', 'updated_at']:
