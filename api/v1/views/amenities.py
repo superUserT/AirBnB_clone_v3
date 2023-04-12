@@ -43,7 +43,7 @@ def delete_amenity(amenity_id: str):
         abort(404)
 
     amenity.delete()
-    amenity.save()
+    storage.save()
 
     return jsonify({}), 200
 
