@@ -46,7 +46,7 @@ def delete_review(review_id: str):
     review.delete()
     storage.save()
 
-    return jsonify({}), 200
+    return jsonify({}), 201
 
 
 @app_views.route(
