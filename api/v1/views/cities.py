@@ -17,10 +17,7 @@ def cities(state_id: str):
     if state is None:
         abort(404)
 
-    cities_list = []
-
-    for city in state.cities:
-        cities_list.append(city.to_dict())
+    cities_list = list(map(lambda x: x.to_dict(), state.cities))
 
     return jsonify(cities_list)
 

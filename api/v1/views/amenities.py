@@ -11,10 +11,7 @@ def amenities():
     """List all the amenities"""
     amenities = storage.all(Amenity)
 
-    amenities_list = list()
-
-    for value in amenities.values():
-        amenities_list.append(value.to_dict())
+    amenities_list = list(map(lambda x: x.to_dict(), amenities.values()))
 
     return jsonify(amenities_list)
 

@@ -10,10 +10,8 @@ from models.state import State
 def states():
     """Returning a list of states"""
     states = storage.all(State)
-    states_list = list()
 
-    for state in states.values():
-        states_list.append(state.to_dict())
+    states_list = list(map(lambda x: x.to_dict(), states.values()))
 
     return jsonify(states_list)
 
