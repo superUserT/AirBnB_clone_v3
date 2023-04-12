@@ -56,14 +56,14 @@ def create_city(state_id: str):
     """Creating a new city"""
     data = request.get_json()
     if data is None:
-        abort(404, 'Not json')
+        abort(400, 'Not json')
 
     state = storage.get(State, state_id)
     if state is None:
         abort(404)
 
     if 'name' not in data.keys():
-        abort(404, 'Missing name')
+        abort(400, 'Missing name')
 
     city = City(**data, state_id=state_id)
 
@@ -79,7 +79,7 @@ def update_city(city_id: str):
 
     data = request.get_json()
     if data is None:
-        abort(404, 'Not a JSON')
+        abort(400, 'Not a JSON')
 
     for key, value in data.items():
         if key in ['id', 'created_at', 'updated_at', 'state_id']:
