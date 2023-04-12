@@ -73,7 +73,7 @@ def update_amenity(amenity_id: str):
     if data is None:
         abort(400, 'Not a JSON')
 
-    amenity = storage(Amenity, amenity_id)
+    amenity = storage.get(Amenity, amenity_id)
     if amenity is None:
         abort(404)
 
