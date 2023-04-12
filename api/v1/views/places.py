@@ -1,15 +1,11 @@
 #!/usr/bin/python3
-"""
-This is the place module
-contains all the routes
-for manage the places class
-"""
+"""Routes"""
 from api.v1.views import app_views
 from flask import jsonify, abort, request
 from models import storage
 from models.city import City
 from models.place import Place
-from models.place import User
+from models.user import User
 
 
 @app_views.route(
