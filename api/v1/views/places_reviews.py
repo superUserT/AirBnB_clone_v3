@@ -46,7 +46,7 @@ def delete_review(review_id: str):
     review.delete()
     storage.save()
 
-    return jsonify({}), 201
+    return jsonify({}), 200
 
 
 @app_views.route(
@@ -75,7 +75,7 @@ def create_review(place_id: str):
 
     review = Review(**data, place_id=place.id)
 
-    return jsonify(review.to_dict())
+    return jsonify(review.to_dict()), 201
 
 
 @app_views.route('/reviews/<review_id>', methods=['PUT'], strict_slashes=False)
