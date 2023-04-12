@@ -36,7 +36,7 @@ def delete_state(state_id: str):
         abort(404)
 
     state.delete()
-    storage.save()
+    state.save()
 
     return jsonify({}), 200
 
@@ -71,5 +71,5 @@ def mod_state(state_id: str):
 
         state.__setattr__(key, value)
 
-    storage.save()
+    state.save()
     return jsonify(state.to_dict()), 200
