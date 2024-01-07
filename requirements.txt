@@ -1,4 +1,4 @@
 Flask
-mysql
-libmysqlclient-dev
-mysql-connector-python
+# how to install sql on ubuntu
+# sudo apt-get install python3-dev default-libmysqlclient-dev build-essential pkg-config
+# pip install mysqlclient
